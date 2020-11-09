@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8" />
         <link rel="canonical" href="{{ .Permalink }}" />
-        <link rel="stylesheet" href='/css/{{ index .Site.Data.css.hash "main.css" }}' />
+        {{ $style := resources.Get "css/main.sass" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+        <link rel="stylesheet" href="{{ $style.Permalink }}">
         <link rel="shortcut icon" href="/images/logo-icon.svg" />
 
         <title>{{ block "title" . }}{{ end }}</title>
@@ -33,6 +34,7 @@
         <!-- More shared code, perhaps a footer -->
         {{ partial "footer.html" . }}
 
-        <script src='/js/{{ index .Site.Data.js.hash "main-min.js" }}'></script>
+        {{ $script := resources.Get "js/main.js" | resources.Minify | resources.Fingerprint }}
+        <script src='{{ $script.Permalink }}'></script>
     </body>
 </html>

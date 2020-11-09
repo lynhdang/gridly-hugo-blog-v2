@@ -1,110 +1,55 @@
-var gulp = require('gulp'),
-    sass = require('gulp-sass'),
-    autoprefixer = require('gulp-autoprefixer'),
-    hash = require('gulp-hash'),
-    minify = require('gulp-minify'),
-    del = require('del'),
-    gulpImagemin = require('gulp-imagemin');
-
+var gulp = require('gulp');
+const fs = require('fs');
+const { GridlyClient, GridlyParser } = require('gridly-client-js');
 const gridlyConfig = require('./gridly.json');
-var gridlyBuild = require('./gridlyBuild');
 
-function clean() {
-    return del(['static/css/**/*', 'static/images/**/*', 'static/js/**/*', 'static/download-data/**/*']);
+let gridlyClient;
+
+async function buildI18n({ view, columns, file }) {
+    const records = await gridlyClient.records(view).get();
+    const content = GridlyParser.i18nToMD(records, columns);
+    
+    fs.writeFile(file, content, function (err) {
+        if (err) console.log(`Build: i18n`, err);
+    });
 }
 
-function cleanImages() {
-    return del(['build']);
+async function buildPostPages({ view, columns, folder }) {
+    const records = await gridlyClient.records(view).get();
+    
+    records.forEach((record) => {
+        if (record[columns.postID]) {
+            const content = GridlyParser.postToMD(record, columns);
+            fs.writeFile(`${folder}/${record[columns.postID]}.md`, content, function (err) {
+                if (err) console.log(`Build: ${record[columns.postID]}.md`, err);
+            });
+        }
+    });
 }
 
-// Compile & hash SCSS files
-function scss() {
-    gulp.src('src/css/*.sass')
-        .pipe(
-            sass({
-                outputStyle: 'compressed'
-            })
-        )
-        .pipe(
-            autoprefixer({
-                browsers: ['last 20 versions']
-            })
-        )
-        .pipe(hash())
-        .pipe(gulp.dest('static/css'))
-        .pipe(hash.manifest('hash.json'))
-        .pipe(gulp.dest('data/css'));
-    return gulp.src(['src/css/**/*.css']).pipe(gulp.dest('static/css'));
-}
+async function run(config) {
+    if (config.apiKey !== "{YOUR_API_KEY}") {
+        gridlyClient = new GridlyClient(config.apiKey, 'https://api.gridly.com/v1');
 
-function images() {
-    return gulp.src('src/images/**/*').pipe(gulp.dest('static/images'));
-}
-
-function minImages() {
-    gulp.src('src/images/**/*')
-        .pipe(
-            gulpImagemin([
-                gulpImagemin.gifsicle({ interlaced: true }),
-                gulpImagemin.mozjpeg({ quality: 75, progressive: true }),
-                gulpImagemin.optipng({ optimizationLevel: 5 }),
-                gulpImagemin.svgo({
-                    plugins: [{ removeViewBox: true }, { cleanupIDs: true }]
-                })
-            ])
-        )
-        .pipe(gulp.dest('build/images'));
-
-    return gulp
-        .src('static/upload-data/**/*')
-        .pipe(
-            gulpImagemin([
-                gulpImagemin.gifsicle({ interlaced: true }),
-                gulpImagemin.mozjpeg({ quality: 75, progressive: true }),
-                gulpImagemin.optipng({ optimizationLevel: 5 }),
-                gulpImagemin.svgo({
-                    plugins: [{ removeViewBox: true }, { cleanupIDs: false }]
-                })
-            ])
-        )
-        .pipe(gulp.dest('build'));
-}
-
-function scripts() {
-    return (
-        gulp
-            .src('src/js/*.js')
-            .pipe(minify())
-            .pipe(hash())
-            .pipe(gulp.dest('static/js'))
-            .pipe(hash.manifest('hash.json'))
-            .pipe(gulp.dest('data/js'))
-    );
-}
-
-// Watch asset folder for changes
-function watch() {
-    gulp.watch('src/css/**/*', scss);
-    gulp.watch('src/images/**/*', images);
-    gulp.watch('src/js/**/*', scripts);
+        await buildI18n(config.grids.i18n);
+        await buildPostPages(config.grids.posts);
+    } else {
+        throw "Your Gridly API key is not valid.";
+    }
 }
 
 async function buildContent() {
-    await gridlyBuild.run(gridlyConfig);
+    await run(gridlyConfig);
 
     return new Promise((resolve, reject) => {
         resolve();
     });
 }
 
-var buildImages = gulp.series(cleanImages, gulp.parallel(minImages));
 
 var build = gulp.series(
-    clean,
-    gulp.parallel(scss, images, scripts, buildContent)
+    gulp.parallel(buildContent)
 );
 
-exports.watch = watch;
-exports.buildImages = buildImages;
 exports.build = build;
 exports.default = build;
