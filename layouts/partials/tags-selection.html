@@ -1,0 +1,13 @@
+<div class="card-body tags-selection">
+    {{ $pageurl := path.Dir .RelPermalink }}
+    <a href='{{"/" | relLangURL}}' class='card-type {{ if eq (replace $pageurl "/" "") "" }}selected{{ end }}'>
+        {{ i18n "blog_tag_all" .}}
+    </a>
+    {{range $key, $taxonomy := .Site.Taxonomies.tags}}
+        {{ with $.Site.GetPage (printf "/tags/%s" $key) }}
+            <a href="{{ .RelPermalink }}" class='card-type {{ if ( hasPrefix (replace $pageurl "/tags/" "") $key )  }}selected{{ end }}'>
+                {{$key}}
+            </a>
+        {{end}}
+    {{end}}
+</div>

@@ -1,0 +1,21 @@
+{{ $pageurl := path.Dir .RelPermalink }}
+<nav id="header" class='navbar' role="navigation" aria-label="main navigation">
+    <div class="container nav--inline">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{{ .Site.LanguagePrefix }}">
+                <img class="header-logo-icon" src="/images/logo_gridly_onwhite.svg" alt="Gridly logo" />
+            </a>
+        </div>
+
+        <div class="navbar-menu " id="headerNavbar">
+            <div class="navbar-end">
+                <a class='navbar-item {{ if or (eq (replace $pageurl "/" "") "") (hasPrefix (replace $pageurl "/" "") "tags") }}is-active{{ end }}' href='{{"/" | relLangURL}}'>
+                    {{ i18n "nav-blog" .}}
+                </a>
+                <a class='navbar-item' href='https://www.gridly.com/about/' target="_blank" rel="noopener">
+                    {{ i18n "nav-about" .}}
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,21 @@
+<article class="card blog-list-item">
+    <div class="card-image">
+        <a href="{{ path.Dir .RelPermalink }}">
+            <figure class="image">
+                <img src="/images/icons/ic_pic_loading.svg" data-src="{{.Params.image}}" alt="{{ .Title }}">
+            </figure>
+        </a>
+    </div>
+    <div class="card-date note-text">{{.Date.Format "01-02-2006"}} &nbsp;|&nbsp; {{ .Params.author }}</div>
+    <h4 class="card-header-title">
+        <a href="{{ path.Dir .RelPermalink }}">{{ .Title | safeHTML }}</a>
+    </h4>
+
+    <div class="tag-items">
+        {{ range $key, $value := .Params.tags }}
+        <div class="card-type card-type-{{ lower $value}}">
+            {{$value}}
+        </div>
+        {{ end }}
+    </div>
+</article>

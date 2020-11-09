@@ -1,0 +1,149 @@
+.section-blog-posts {
+  .card {
+    color: #080A31;
+    box-shadow: initial;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+
+    .card-header-title {
+      font-weight: 400;
+      padding: 0.5rem 0;
+
+      a {
+        color: #080A31;
+      }
+    }
+
+  }
+
+  .image {
+    img {
+      width: auto !important;
+      height: auto;
+    }
+  }
+
+  .tag-list {
+    position: sticky;
+    z-index: 999;
+    top: 60px;
+    background-color: #fff;
+    height: 50px;
+
+    @include desktop {
+      top: 80px;
+    }
+  }
+}
+
+.card-date {
+  font-size: 1rem;
+  margin: .5rem 0;
+}
+
+.tags-selection {
+  .card-type {
+    &:not(:last-child) {
+      margin-right: .5rem;
+  
+      @include tablet {
+          margin-right: 1rem;
+      }
+    }
+  }
+}
+
+.card-type {
+  display: inline-block;
+  padding: 4px 22px;
+  background: #ECEDFB;
+  border-radius: 50px;
+  font-size: 1rem;
+  color: #000;
+  margin-top: 6px;
+  text-transform: capitalize;
+
+  &.selected {
+    background-color: #705BC8;
+    color: #fff;
+  }
+}
+
+.card-type-development {
+  background: #E0EDFF;
+}
+
+.card-type-localization {
+  background: #F5E8FF;
+}
+
+.card-type-updates {
+  background: #FBF1D6;
+}
+
+.section-blog-details {
+  .row {
+    margin-bottom: 3rem;
+  }
+}
+
+.blog-list-item {
+  flex: 1 1 auto;
+  height: 100%;
+  position: relative;
+
+  figure {
+    margin: 0;
+  }
+}
+
+.social-share-buttons {
+  .share-btn {
+      width: 20px;
+      height: 20px;
+      margin: 6px;
+      padding: 4px;
+  }
+
+}
+
+.well {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: rgba(54, 74, 77, 0.03);
+  border-radius: 3px;
+  box-shadow: none;
+  border: 1px solid #e1e5e6;
+}
+
+.embed-responsive-16by9 {
+  padding-bottom: 56.25% !important;
+}
+
+.embed-responsive {
+  position: relative;
+  display: block;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    border: 0;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}

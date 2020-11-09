@@ -1,0 +1,64 @@
+.navbar-item {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    margin: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.navbar-brand {
+    .navbar-item {
+        img {
+            max-height: 3rem;
+        }
+    }
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+    background-color: #48388E;
+
+    @include desktop {
+        padding: 0;
+    }
+
+    &.secondary {
+        opacity: 0.9;
+        font-size: 0.8em;
+        background-color: rgba(#ffffff, 0.5);
+        a.navbar-item {
+            padding: 0rem 1rem;
+        }
+        img {
+            max-height: 2.5rem;
+        }
+        button {
+            height: 3em;
+        }
+    }
+
+    .container {
+        border-bottom: linear-gradient(to top, rgba(255, 255, 255, 0), #000000);
+    }
+}
+
+.header-logo-icon {
+    height: 32px;
+    width: auto;
+}
+
+.navbar-item-wide {
+    margin-left: auto !important;
+}
+
+.navbar-item {
+    &.is-active,
+    &:hover {
+        background-color: initial !important;
+        color: rgba(255, 255, 255, 1) !important;
+        font-size: 1rem;
+    }
+}

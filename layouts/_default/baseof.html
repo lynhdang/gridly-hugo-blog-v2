@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="{{ .Language.Lang }}">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="canonical" href="{{ .Permalink }}" />
+        <link rel="stylesheet" href='/css/{{ index .Site.Data.css.hash "main.css" }}' />
+        <link rel="shortcut icon" href="/images/logo-icon.svg" />
+
+        <title>{{ block "title" . }}{{ end }}</title>
+        {{ $url := urls.Parse .Permalink }}
+        <meta name="description" content="{{ .Description }}" />
+        {{ with .Keywords }}
+        <meta name="keywords" content="{{ range $i, $e := . }}{{ if $i }} {{ end }}{{ $e }}{{ end }}" />
+        {{ end }}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:title" content='{{ block "title" . }}{{ end }}' />
+        <meta property="og:description" content="{{ .Description }}" />
+        <meta
+            property="og:image"
+            content="{{ $url.Scheme }}://{{ $url.Host }}/images/gridly-sharing-logo.png"
+        />
+        <meta property="og:url" content="{{ .Permalink }}" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <base href="{{ .Site.BaseURL }}" />
+    </head>
+    <body>
+        <!-- Code that all your templates share, like a header -->
+        {{ partial "nav.html" . }}
+        <!-- The part of the page that begins to differ between templates -->
+        <div id="main">
+            {{ block "main" . }}{{ end }}
+        </div>
+        <!-- More shared code, perhaps a footer -->
+        {{ partial "footer.html" . }}
+
+        <script src='/js/{{ index .Site.Data.js.hash "main-min.js" }}'></script>
+    </body>
+</html>

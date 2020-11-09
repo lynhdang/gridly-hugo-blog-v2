@@ -1,0 +1,20 @@
+baseURL = ""
+languageCode = "en-us"
+DefaultContentLanguage = "en"
+
+title = "Gridly Hugo Blog Template"
+
+enableRobotsTXT = true
+
+[Languages]
+  [Languages.en]
+    weight = 1
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

@@ -1,0 +1,28 @@
+{
+    "apiKey": "QUFBQUFBQUFBQnM9ISYjfjo7JycrQUFBQmNzQ2NxZ1k9",
+    "grids": {
+        "i18n": {
+            "view": "wmkfvoI6hH",
+            "file": "i18n/en.yaml",
+            "columns": {
+                "stringID": "column1",
+                "value": "column2"
+            }
+        },
+        "posts": {
+            "view": "aHf0dF10Rg",
+            "folder": "content",
+            "columns": {
+                "postID": "column1",
+                "coverImage": "column2",
+                "title": "column3",
+                "description": "column4",
+                "author": "column5",
+                "tags": "column7",
+                "isTop": "column8",
+                "date": "column9",
+                "content": "column6"
+            }
+        }
+    }
+}

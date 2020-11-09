@@ -1,0 +1,53 @@
+<section class="hero section-top is-medium">
+    <div class="container">
+        <div class="hero-body">
+        </div>
+    </div>
+</section>
+<section class="section section-heighlight-posts">
+    <div class="container">
+        <div class="tag-list is-hidden-tablet has-text-right">
+            {{ partial "tags-selection.html" . }}
+            <p></p>
+        </div>
+        {{ range first 1 (where .Pages ".Params.top" true) }}
+        <div class="columns">
+            <div class="column">
+                <h2>
+                    <a class="title" href="{{ path.Dir .RelPermalink }}" class="content-text">{{ .Title | safeHTML }}</a>
+                </h2>
+                <p class="note-text">{{.Date.Format "01-02-2006"}} &nbsp;|&nbsp; {{ .Params.author }}</p>
+                <p class="content-text">{{ .Description | safeHTML }}</p>
+                <p class="">
+                    <a class="button secondary-link-btn border" href="{{ path.Dir .RelPermalink }}">
+                        {{ i18n "read-more" .}}
+                    </a>
+                </p>
+            </div>
+            <div class="column">
+                <a href="{{ path.Dir .RelPermalink }}">
+                    <figure class="image">
+                        <img src="{{.Params.image}}" alt="{{ .Title }}">
+                    </figure>
+                </a>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</section>
+<section class="section section-blog-posts">
+    <div class="container">
+        <div class="tag-list is-hidden-mobile">
+            {{ partial "tags-selection.html" . }}
+        </div>
+        <div class="content subsection">
+            <div class="columns is-multiline eqheight">
+                {{ range .Data.Pages }}
+                    <div class="column is-6-tablet is-4-desktop">
+                        {{ partial "post-item.html" . }}
+                    </div>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+</section>

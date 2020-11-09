@@ -1,0 +1,60 @@
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+{{ define "main" }}
+    <section class="hero section-top is-medium">
+        <div class="container">
+            <div class="hero-body">
+            </div>
+        </div>
+    </section>
+    <section class="section section-blog-details">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-10-tablet is-8-desktop">
+                    <h1 class="title has-text-left">{{ .Title | safeHTML }}</h1>
+                    <section class="subsection">{{ .Description | safeHTML }}</section>
+                    <section class="subsection columns is-desktop">
+                        <div class="column is-8-desktop">
+                            {{ range $key, $value := .Params.tags }}
+                                <div class="card-type card-type-{{ lower $value}}">
+                                    {{$value}}
+                                </div>
+                            {{ end }}
+                            &nbsp;
+                            <span class="card-date note-text">{{.Date.Format "01-02-2006"}} &nbsp;|&nbsp; {{ .Params.author }}</span>
+                        </div>
+                        <div class="column is-content-right-desktop">
+                            {{ partial "share-buttons.html" . }}
+                        </div>
+                    </section>
+                    {{ if isset .Params "image" }}
+                        <section class="subsection">
+                            <figure class="image">
+                                <img data-src="{{.Params.image}}" alt="{{ .Title }}">
+                            </figure>
+                        </section>
+                    {{ end }}
+                    <section class="subsection">
+                        <article id="blogContent" class="blog-content singlepost">
+                            {{ .Content }}
+                        </article>
+                        <div class="is-content-right">
+                            {{ partial "share-buttons.html" . }}
+                        </div>
+                    </section>
+                    <section class="subsection related-posts section-blog-posts">
+                        <h2 class="title is-3 subtitle-1">
+                            {{ i18n "blog_related_posts" .}}
+                        </h2>
+                        <div class="columns is-multiline eqheight">
+                            {{ range first 10 ( where ( where .Site.Pages.ByDate.Reverse ".Params.tags" "intersect" .Params.tags ) "Permalink" "!=" .Permalink ) }}
+                                <div class="column is-6-tablet is-6-desktop">
+                                    {{ partial "post-item.html" . }}
+                                </div>
+                            {{ end }}
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+{{ end }}
