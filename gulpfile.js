@@ -1,12 +1,12 @@
 var gulp = require('gulp');
 const fs = require('fs');
-const { GridlyClient, GridlyParser } = require('gridly-client-js');
+const { GridlyAPI, GridlyParser } = require('gridly-client-js');
 const gridlyConfig = require('./gridly.json');
 
-let gridlyClient;
+let gridlyAPI;
 
 async function buildI18n({ view, columns, file }) {
-    const records = await gridlyClient.records(view).get();
+    const records = await gridlyAPI.records(view).get();
     const content = GridlyParser.i18nToMD(records, columns);
     
     fs.writeFile(file, content, function (err) {
@@ -15,7 +15,7 @@ async function buildI18n({ view, columns, file }) {
 }
 
 async function buildPostPages({ view, columns, folder }) {
-    const records = await gridlyClient.records(view).get();
+    const records = await gridlyAPI.records(view).get();
     
     records.forEach((record) => {
         if (record[columns.postID]) {
@@ -29,7 +29,7 @@ async function buildPostPages({ view, columns, folder }) {
 
 async function run(config) {
     if (config.apiKey !== "{YOUR_API_KEY}") {
-        gridlyClient = new GridlyClient(config.apiKey, 'https://api.gridly.com/v1');
+        gridlyAPI = new GridlyAPI(config.apiKey, 'https://api.gridly.com/v1');
 
         await buildI18n(config.grids.i18n);
         await buildPostPages(config.grids.posts);

@@ -3,10 +3,6 @@
     font-family: $title-family;
 }
 
-.white {
-    color: #fff !important;
-}
-
 .content-img-svg {
     font-weight: 400;
     width: 100%;
@@ -61,4 +57,95 @@ figure {
         height: 200px;
         width: 200px;
     }
+}
+
+/************** helper **************/
+
+.white {
+    color: #fff !important;
+}
+
+.has-text-centered-mobile {
+    @include mobile {
+        text-align: center;
+    }
+}
+
+.is-content-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.is-content-centered-mobile {
+    @include mobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.is-content-centered-tablet {
+    @include tablet {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.is-content-left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.is-content-left-tablet {
+    @include tablet {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+}
+
+.is-content-left-desktop {
+    @include desktop {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+}
+
+.is-content-right-desktop {
+    @include desktop {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+}
+
+.is-content-right {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.is-content-bottom {
+    display: flex;
+    align-items: bottom;
+}
+
+.is-content-vertical-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.is-row-reverse {
+    flex-direction: row-reverse;
+}
+
+.is-full-height {
+    height: 100%;
 }
