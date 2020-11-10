@@ -1,27 +1,27 @@
 {
-    "apiKey": "QUFBQUFBQUFBQnM9ISYjfjo7JycrQUFBQmNzQ2NxZ1k9",
+    "apiKey": "{YOUR_API_KEY}",
     "grids": {
         "i18n": {
-            "view": "wmkfvoI6hH",
+            "view": "{VIEW_ID}",
             "file": "i18n/en.yaml",
             "columns": {
-                "stringID": "column1",
-                "value": "column2"
+                "stringID": "{COLUMN_ID}",
+                "value": "{COLUMN_ID}"
             }
         },
         "posts": {
-            "view": "aHf0dF10Rg",
+            "view": "{VIEW_ID}",
             "folder": "content",
             "columns": {
-                "postID": "column1",
-                "coverImage": "column2",
-                "title": "column3",
-                "description": "column4",
-                "author": "column5",
-                "tags": "column7",
-                "isTop": "column8",
-                "date": "column9",
-                "content": "column6"
+                "postID": "{COLUMN_ID}",
+                "coverImage": "{COLUMN_ID}",
+                "title": "{COLUMN_ID}",
+                "description": "{COLUMN_ID}",
+                "author": "{COLUMN_ID}",
+                "tags": "{COLUMN_ID}",
+                "isTop": "{COLUMN_ID}",
+                "date": "{COLUMN_ID}",
+                "content": "{COLUMN_ID}"
             }
         }
     }

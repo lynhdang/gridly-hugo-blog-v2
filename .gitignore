@@ -1,0 +1,16 @@
+*.sassc
+config.codekit3
+.vscode/
+.idea/
+.sass-cache/
+.DS_Store
+
+node_modules/
+data/**/hash.*
+public/
+build/
+i18n/
+content/
+static/css
+static/js
+yarn.lock
