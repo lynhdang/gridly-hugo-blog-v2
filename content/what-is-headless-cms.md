@@ -116,4 +116,4 @@ GaaS games are relatively new, and so are CMSes that support them. Unlike tradit
 
 Meet Gridly, a headless CMS for multilingual game development.
 
-Want to learn more? [Get started with headless](https://app.gridly.com/getstarted) right now (it's free) or [schedule a demo](https://localizedirect.agilecrm.com/calendar/chris_detyna,dolly,markus,tim_farvadeev,edwin_caparaz) for a brief introduction.
+Want to learn more? [Get started with headless](https://dev-gridly-landing.netlify.app) right now (it's free) or [schedule a demo](https://localizedirect.agilecrm.com/calendar/chris_detyna,dolly,markus,tim_farvadeev,edwin_caparaz) for a brief introduction.
